@@ -1,20 +1,40 @@
 <script lang="ts">
+	import Toggle from "svelte-toggle";
 	import JobCard from './JobCard.svelte';
 	import type { Job } from '../types/types';
+	import JobStore from '../stores/JobStore';
+
+	const { onDuty, toggleDuty } = JobStore;
 
 	export let jobArray: Array<Job> = [];
 	export let panelName: string = "";
+
+	let toggled = $onDuty;
+	function handleDutyChange() {
+		toggleDuty();
+	}
 
 </script>
 
 <main class="w-[380px] min-h-screen block pt-[20px] select-none">
 	<div class="text-white px-[28px] pb-4">
 		<p class="category">CATEGORY</p>
-		<p class="category-name text-white block mt-[-5px] font-medium capitalize">
-			{panelName} Jobs
-		</p>
+				<p class="category-name text-white block mt-[-5px] font-medium capitalize tracking-wide">
+					{panelName} Jobs
+				</p>
+				<div class="display-flex text-right">
+					<p class="category-name text-white mt-[-5px] font-medium capitalize tracking-wide">
+						OnDuty
+					</p>
+					<Toggle class="w-7 ml-auto"
+						bind:toggled
+						hideLabel
+						toggledColor="var(--color-green)"
+						untoggledColor="var(--color-orange)"
+						on:toggle={() => (handleDutyChange())}
+					/>
+				</div>
 	</div>
-
 	<div class="max-h-screen overflow-y-auto px-[28px] pb-20">
 		{#each jobArray as job (job.name)}
 			<JobCard name={job.label} nuiName={job.name} nuiRank={job.grade} icon={job.icon} description={job.description}

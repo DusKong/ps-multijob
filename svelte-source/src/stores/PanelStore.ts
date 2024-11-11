@@ -50,6 +50,10 @@ const store = () => {
     },
     setSide(side: side) {
       PanelStore.side.set(side);
+    },
+    close() {
+      methods.setShow(false);
+      fetchNUI("closemenu", null);
     }
   }
 

@@ -13,7 +13,6 @@
 	</div>
 	<div class="text-center">
 		<p class="text-xs">
-			{detail}:
 			<span class="text-[var(--color-green)]">
 				{value}
 			</span>

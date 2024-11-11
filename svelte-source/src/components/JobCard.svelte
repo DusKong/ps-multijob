@@ -107,7 +107,6 @@
 	<div class="job-details flex gap-[12px] justify-stretch">
 		<JobDetail icon={SalarySVG} detail="Salary" value={salary} svgSize="w-[0.8rem]"/>
 		<JobDetail icon={RankSVG}   detail="Rank"   value={rank} svgSize="w-[1.4rem]"/>
-		<JobDetail icon={ActiveSVG} detail="Active" value={active} svgSize="w-[1.1rem]"/>
 	</div>
 	<div class="mt-2">
 		{#if !isActive}
@@ -121,43 +120,18 @@
 			</button>
 		{/if}
 		{#if isActive}
-			<div class="flex flex-row justify-between gap-2">
-					<button class={"flex flex-1 flex-row gap-2 border-1 b-rd-[5px] justify-center items-center h-11"+
-						(selectHover ? "border-[var(--color-orange)] text-[var(--color-orange)]":"")}
-						on:click={handleUnSelectJob} on:mouseenter={handleOnSelectMouseEnter} on:mouseleave={handleOnSelectMouseLeave}>
-						{#if !selectHover}
-							<div class="w-5">
-								<svelte:component this={SelectSVG}/>
-							</div>
-						{/if}
-						<p class="uppercase tracking-wide">
-							{selectText}
-						</p>
-					</button>
-				<div class="flex-1">
-					<button class={`flex flex-row justify-center items-center gap-1 h-11 border-1 b-rd-[5px] py-[10px] font-medium flex-1 w-full ` +
-						($onDuty ?
-							"border-[var(--color-green)]  text-[var(--color-green)] "
-						: "border-[var(--color-orange)] text-[var(--color-orange)] ")+
-						($onDuty && !transitionOnDuty ? "hover:border-[var(--color-orange)] hover:text-[var(--color-orange)]":"")+
-						(!$onDuty && !transitionOffDuty ? "hover:border-[var(--color-green)]  hover:text-[var(--color-green)]":"")
-						}
-						on:click={handleDutyChange} on:mouseenter={handleOnDutyMouseEnter} on:mouseleave={handleOnDutyMouseLeave}
-					>
-						{#if ($onDuty && !onDutyHover) || transitionOnDuty}
-							<div class="w-5">
-								<svelte:component this={ClockSVG} />
-							</div>
-						{/if}
-						{#if (!$onDuty && !onDutyHover) || transitionOffDuty}
-							<div class="w-[0.9rem]">
-								<svelte:component this={CrossMarkSVG} />	
-							</div>
-						{/if}
-						<p class="ml-[5px] uppercase tracking-wide">{dutyText}</p>
-					</button>
-				</div>
-			</div>
+			<button class={"border-1 b-rd-[5px] flex flex-row gap-1 py-[10px] font-medium flex-1 w-full justify-center items-center h-11"+
+				(selectHover ? "border-[var(--color-orange)] text-[var(--color-orange)]":"")}
+				on:click={handleUnSelectJob} on:mouseenter={handleOnSelectMouseEnter} on:mouseleave={handleOnSelectMouseLeave}>
+				{#if !selectHover}
+					<div class="w-5">
+						<svelte:component this={SelectSVG}/>
+					</div>
+				{/if}
+				<p class="uppercase tracking-wide">
+					{selectText}
+				</p>
+			</button>
 		{/if}
 	</div>
 </main>
